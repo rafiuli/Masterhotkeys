@@ -1,21 +1,24 @@
-#Requires AutoHotkey v2.0++
+; sync test IT WORKS
+
+#Requires AutoHotkey v2.0+
+
 ; ====================================================
-; HOTKEY QUICK REFERENCE
+; 🔑 HOTKEY QUICK REFERENCE
 ; ====================================================
-; Win + Shift + C → Calculator
-; Win + Shift + P → Paint
-; Win + Shift + N → Notepad
-; Win + Shift + O → Outlook
-; Win + Shift + B → Brave
-; Win + Shift + Y → Yandex
-; Win + Shift + Esc → System Informer
-; Ctrl + Alt + D → Toggle Display Mode
-; Ctrl + Alt + B → Toggle Default Browser
-; Ctrl + Alt + S → Toggle between EDIFIER and TOSHIBA-TV output
-; Ctrl + Shift + ` → Launch ColorHotkeys UI
-; Alt + Space → ChatGPT Companion only when ChatGPT active
+; Win + Shift + C    → Calculator
+; Win + Shift + P    → Paint
+; Win + Shift + N    → Notepad
+; Win + Shift + O    → Outlook
+; Win + Shift + B    → Brave
+; Win + Shift + Y    → Yandex
+; Win + Shift + Esc  → System Informer
+; Ctrl + Alt + D     → Toggle Display Mode
+; Ctrl + Alt + B     → Toggle Default Browser
+; Ctrl + Alt + S     → Toggle between EDIFIER and TOSHIBA-TV output
+; Ctrl + Shift + `   → Launch ColorHotkeys UI
+
 ; ====================================================
-; LAUNCH APPLICATIONS
+; 📦 LAUNCH APPLICATIONS
 ; ====================================================
 #+c:: Run("calc.exe")
 #+p:: Run("mspaint.exe")
@@ -51,14 +54,16 @@ browserToggle := false
 }
 
 ; ─────────────────────────────────────────────
-; AUDIO TOGGLE: EDIFIER R1700BT ↔ TOSHIBA-TV
+; 🔊 AUDIO TOGGLE: EDIFIER R1700BT ↔ TOSHIBA-TV
 ; ─────────────────────────────────────────────
 ; Ctrl + Alt + S → Switch between TV and Edifier speakers silently
 ^!s:: {
     edifierIndex := 13
     toshibaIndex := 2
+
     current := GetCurrentAudioDevice()
     newIndex := InStr(current, "EDIFIER") ? toshibaIndex : edifierIndex
+
     RunWait("powershell.exe -Command Set-AudioDevice -Index " . newIndex, , "Hide")
 }
 
@@ -69,10 +74,10 @@ GetCurrentAudioDevice() {
 }
 
 ; ================================
-; OPEN NOTEPAD IN ACTIVE FOLDER OR DOWNLOADS
+; 📝 OPEN NOTEPAD IN ACTIVE FOLDER OR DOWNLOADS
 ; ================================
-#+n:: {
-    ; Win + Shift + N
+
+#+n:: { ; Win + Shift + N
     try {
         explorerHwnd := WinActive("ahk_class CabinetWClass")
         if explorerHwnd {
@@ -83,6 +88,7 @@ GetCurrentAudioDevice() {
                 }
             }
         }
+
         if !IsSet(folder) || !folder {
             folder := EnvGet("USERPROFILE") "\Downloads"
         }
@@ -104,15 +110,9 @@ GetCurrentAudioDevice() {
     }
 }
 
-; ─────────────────────────────────────────────
-; CHATGPT COMPANION HOTKEY FIX (Scoped Alt+Space) – AHK v2
-; ─────────────────────────────────────────────
-; Alt + Space → Only triggers Companion inside ChatGPT (v2 syntax)
-HotIfWinActive("ahk_exe ChatGPT.exe")
-!Space::Send("!{Space}")
-HotIf()  ; clear context
 
 ; ─────────────────────────────────────────────
 ; LAUNCH AUDIO ROUTER
 ; ─────────────────────────────────────────────
 ^!a:: Run("C:\Users\rafiu\Documents\Software\Audio\AudioRouter-0.10.2 [dual audio output]\Audio Router.exe")
+
