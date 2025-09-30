@@ -1,4 +1,4 @@
-#Requires AutoHotkey v2.0+
+#Requires AutoHotkey v2.0++
 ; ====================================================
 ; HOTKEY QUICK REFERENCE
 ; ====================================================
@@ -13,7 +13,7 @@
 ; Ctrl + Alt + B → Toggle Default Browser
 ; Ctrl + Alt + S → Toggle between EDIFIER and TOSHIBA-TV output
 ; Ctrl + Shift + ` → Launch ColorHotkeys UI
-; Ctrl + Alt + Space → Alt+Space remap ONLY for ChatGPT Companion
+; Alt + Space → ChatGPT Companion only when ChatGPT active
 ; ====================================================
 ; LAUNCH APPLICATIONS
 ; ====================================================
@@ -105,12 +105,12 @@ GetCurrentAudioDevice() {
 }
 
 ; ─────────────────────────────────────────────
-; CHATGPT COMPANION HOTKEY FIX (Scoped Alt+Space)
+; CHATGPT COMPANION HOTKEY FIX (Scoped Alt+Space) – AHK v2
 ; ─────────────────────────────────────────────
-; Alt + Space → Only triggers Companion inside ChatGPT
-#IfWinActive ahk_exe ChatGPT.exe
+; Alt + Space → Only triggers Companion inside ChatGPT (v2 syntax)
+HotIfWinActive("ahk_exe ChatGPT.exe")
 !Space::Send("!{Space}")
-#IfWinActive
+HotIf()  ; clear context
 
 ; ─────────────────────────────────────────────
 ; LAUNCH AUDIO ROUTER
