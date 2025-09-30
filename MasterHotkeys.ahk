@@ -1,4 +1,4 @@
-; sync test 3
+; sync test 4
 
 #Requires AutoHotkey v2.0+
 
