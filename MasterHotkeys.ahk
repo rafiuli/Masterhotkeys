@@ -13,7 +13,7 @@
 ; Ctrl + Alt + B → Toggle Default Browser
 ; Ctrl + Alt + S → Toggle between EDIFIER and TOSHIBA-TV output
 ; Ctrl + Shift + ` → Launch ColorHotkeys UI
-; Ctrl + Space → ChatGPT Companion trigger (scoped)
+; Ctrl + Space → ChatGPT Companion (no UI conflict)
 ; ====================================================
 ; LAUNCH APPLICATIONS
 ; ====================================================
@@ -105,11 +105,12 @@ GetCurrentAudioDevice() {
 }
 
 ; ─────────────────────────────────────────────
-; CHATGPT COMPANION HOTKEY FIX (Scoped Ctrl+Space) – AHK v2
+; CHATGPT COMPANION HOTKEY FIX (Ctrl+Space, clean v2)
 ; ─────────────────────────────────────────────
-; Ctrl + Space → Only triggers Companion inside ChatGPT (Windows-safe)
+; Ctrl + Space → Triggers Companion inside ChatGPT ONLY
+; Uses SendEvent + {Blind} to suppress system interference
 HotIfWinActive("ahk_exe ChatGPT.exe")
-^Space::Send("!{Space}")
+^Space::SendEvent("{Blind}!{Space}")
 HotIf()
 
 ; ─────────────────────────────────────────────
