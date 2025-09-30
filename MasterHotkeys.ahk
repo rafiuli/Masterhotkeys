@@ -1,5 +1,6 @@
+; sync test 2
+
 #Requires AutoHotkey v2.0+
-; test sync
 
 ; ====================================================
 ; 🔑 HOTKEY QUICK REFERENCE
